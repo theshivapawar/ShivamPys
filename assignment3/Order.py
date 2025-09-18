@@ -1,5 +1,9 @@
+from assignment3.Cookie import Cookie
 from assignment3.candy import Candy
 from assignment3.cart import Cart
+from assignment3.icecream import IceCream
+from assignment3.sundae import Sundae
+from assignment3.topping import Topping
 
 
 class Order:
@@ -13,40 +17,51 @@ class Order:
 
             if choice == 5:
                 print('Thank you :)')
+                Order.cart.print_invoice()
                 break
 
             match choice:
                 case 1:
                     name = input('Name: ')
-                    weight = input('Weight (grams): ')
-                    price_kg = input('Price (kg): ')
+                    weight = int(input('Weight (grams): '))
+                    price_kg = int(input('Price (kg): '))
                     Order.cart.add_to_cart(Candy(name, weight, price_kg))
 
                 case 2:
                     name = input('Name: ')
-                    weight = input('Units: ')
-                    price_dozen = input('Price (Dozen): ')
-                    Order.cart.add_to_cart(Candy(name, weight, price_dozen))
+                    units = int(input('Units: '))
+                    price_dozen = int(input('Price (Dozen): '))
+                    Order.cart.add_to_cart(Cookie(name, units, price_dozen))
 
                 case 3:
                     name = input('Name: ')
-                    weight = input('Units: ')
-                    price_unit = input('Price: ')
-                    Order.cart.add_to_cart(Candy(name, weight, price_unit))
+                    units = int(input('Units: '))
+                    price_unit = int(input('Price: '))
+                    Order.cart.add_to_cart(IceCream(name, units, price_unit))
 
                 case 4:
                     name = input('Name: ')
-                    weight = input('Units: ')
-                    price_unit = input('Price: ')
-                    Order.cart.add_to_cart(Candy(name, weight, price_unit))
+                    units = int(input('Units: '))
+                    price_unit = int(input('Price: '))
+                    toppings = []
+                    while True:
+                        add_topping = input('Add topping? (yes / no): ').lower()
+                        if add_topping == 'no':
+                            break
+                        name = input('Name: ')
+                        topping_units = int(input('Units: '))
+                        price_unit = int(input('Price: '))
+                        toppings.append(Topping(name, topping_units, price_unit))
+                        print(toppings)
 
-
-
+                    Order.cart.add_to_cart(Sundae(name, units, price_unit, toppings))
 
 
     @staticmethod
     def display_menu():
         print(f'\nMenu\n1. Candy\t2. Cookie\t3. IceCream\t4. Sundae\t5. Exit\n')
+
+
 
 
 order = Order()

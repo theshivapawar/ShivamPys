@@ -1,5 +1,8 @@
 from abc import ABC, abstractmethod
 
+from typing_extensions import override
+
+
 class Desert(ABC):
     def __init__(self, name):
         self.name = name
@@ -10,3 +13,7 @@ class Desert(ABC):
     @abstractmethod
     def get_cost(self):
         pass
+
+    @override
+    def __str__(self):
+        return f'{self.name} -- {self.get_cost()}'

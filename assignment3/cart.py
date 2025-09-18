@@ -19,6 +19,6 @@ class Cart:
     @staticmethod
     def print_invoice():
         for item in Cart.items:
-            print(f'{item.get_name()} -- {Cart.get_total_cost()}')
+            print(f'{item.__class__.__name__} -- {Cart.get_total_cost()}')
 
         print(f'Total -- {Cart.get_total_cost()}')
