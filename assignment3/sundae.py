@@ -1,5 +1,4 @@
 from assignment3.desert import Desert
-from functools import reduce
 
 
 class Sundae(Desert):
@@ -10,5 +9,11 @@ class Sundae(Desert):
         self.toppings = toppings
 
     def get_cost(self):
-        toppings_cost = reduce(lambda t1, t2: t1.get_cost() + t2.get_cost(), self.toppings)
+        if len(self.toppings) == 0:
+            return self.units * self.price_unit
+
+        toppings_cost = 0
+        for topping in self.toppings:
+            toppings_cost += topping.get_cost()
+
         return (self.units * self.price_unit) + toppings_cost
