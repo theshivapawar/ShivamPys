@@ -1,6 +1,3 @@
-from functools import reduce
-
-
 class Cart:
     items = []
 

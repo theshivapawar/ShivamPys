@@ -47,12 +47,12 @@ class Order:
                         add_topping = input('Add topping? (yes / no): ').lower()
                         if add_topping == 'no':
                             break
-                        name = input('Name: ')
-                        topping_units = int(input('Units: '))
-                        price_unit = int(input('Price: '))
-                        toppings.append(Topping(name, topping_units, price_unit))
-
+                        topping_name = input('Topping Name: ')
+                        topping_units = int(input('Topping Units: '))
+                        topping_price_unit = int(input('Topping Price: '))
+                        toppings.append(Topping(topping_name, topping_units, topping_price_unit))
                     Cart.add_to_cart(Sundae(name, units, price_unit, toppings))
+
 
 
     @staticmethod

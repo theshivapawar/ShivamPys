@@ -9,9 +9,6 @@ class Sundae(Desert):
         self.toppings = toppings
 
     def get_cost(self):
-        if len(self.toppings) == 0:
-            return self.units * self.price_unit
-
         toppings_cost = 0
         for topping in self.toppings:
             toppings_cost += topping.get_cost()
