@@ -11,4 +11,4 @@ class Cookie(Desert):
         self.price_dozen = price_dozen
 
     def get_cost(self):
-        return (self.units / Cookie.DOZEN) * self.price_dozen
+        return round((self.units / Cookie.DOZEN) * self.price_dozen, 2)

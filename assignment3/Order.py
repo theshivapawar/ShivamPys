@@ -7,7 +7,6 @@ from assignment3.topping import Topping
 
 
 class Order:
-    cart = Cart()
 
     @staticmethod
     def take_order():
@@ -17,7 +16,7 @@ class Order:
 
             if choice == 5:
                 print('Thank you :)')
-                Order.cart.print_invoice()
+                Cart.print_invoice()
                 break
 
             match choice:
@@ -25,19 +24,19 @@ class Order:
                     name = input('Name: ')
                     weight = int(input('Weight (grams): '))
                     price_kg = int(input('Price (kg): '))
-                    Order.cart.add_to_cart(Candy(name, weight, price_kg))
+                    Cart.add_to_cart(Candy(name, weight, price_kg))
 
                 case 2:
                     name = input('Name: ')
                     units = int(input('Units: '))
                     price_dozen = int(input('Price (Dozen): '))
-                    Order.cart.add_to_cart(Cookie(name, units, price_dozen))
+                    Cart.add_to_cart(Cookie(name, units, price_dozen))
 
                 case 3:
                     name = input('Name: ')
                     units = int(input('Units: '))
                     price_unit = int(input('Price: '))
-                    Order.cart.add_to_cart(IceCream(name, units, price_unit))
+                    Cart.add_to_cart(IceCream(name, units, price_unit))
 
                 case 4:
                     name = input('Name: ')
@@ -52,9 +51,8 @@ class Order:
                         topping_units = int(input('Units: '))
                         price_unit = int(input('Price: '))
                         toppings.append(Topping(name, topping_units, price_unit))
-                        print(toppings)
 
-                    Order.cart.add_to_cart(Sundae(name, units, price_unit, toppings))
+                    Cart.add_to_cart(Sundae(name, units, price_unit, toppings))
 
 
     @staticmethod

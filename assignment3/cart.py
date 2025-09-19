@@ -4,21 +4,25 @@ from functools import reduce
 class Cart:
     items = []
 
-    @staticmethod
-    def add_to_cart(desert):
-        Cart.items.append(desert)
+    @classmethod
+    def add_to_cart(cls, desert):
+        cls.items.append(desert)
 
-    @staticmethod
-    def clear_cart():
-        Cart.items = []
+    @classmethod
+    def clear_cart(cls):
+        cls.items = []
 
-    @staticmethod
-    def get_total_cost():
-        return reduce(lambda d1, d2 : d1.get_cost() + d2.get_cost(), Cart.items)
+    @classmethod
+    def get_total_cost(cls):
+        total_cost = 0
+        for item in cls.items:
+            total_cost += item.get_cost()
+        return total_cost
 
-    @staticmethod
-    def print_invoice():
-        for item in Cart.items:
-            print(f'{item.__class__.__name__} -- {Cart.get_total_cost()}')
 
-        print(f'Total -- {Cart.get_total_cost()}')
+    @classmethod
+    def print_invoice(cls):
+        for item in cls.items:
+            print(f'{item.__class__.__name__} -- {item.get_name()} -- {item.get_cost()}')
+
+        print(f'Total -- {cls.get_total_cost()}')
