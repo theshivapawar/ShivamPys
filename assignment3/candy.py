@@ -1,6 +1,5 @@
 from assignment3.desert import Desert
 
-
 class Candy(Desert):
     KG = 1000
 

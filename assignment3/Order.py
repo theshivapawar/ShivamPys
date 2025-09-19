@@ -1,4 +1,4 @@
-from assignment3.Cookie import Cookie
+from assignment3.cookie import Cookie
 from assignment3.candy import Candy
 from assignment3.cart import Cart
 from assignment3.icecream import IceCream
