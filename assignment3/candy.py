@@ -9,4 +9,4 @@ class Candy(Desert):
         self.price_kg = price_kg
 
     def get_cost(self):
-        return round((self.weight / Candy.KG) * self.price_kg)
+        return round((self.weight / Candy.KG) * self.price_kg, 2)

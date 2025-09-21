@@ -1,3 +1,6 @@
+from assignment3.EmptyCartException import EmptyCartException
+from assignment3.InvalidValueException import InvalidValueException
+from assignment3.console import Console
 from assignment3.cookie import Cookie
 from assignment3.candy import Candy
 from assignment3.cart import Cart
@@ -12,48 +15,51 @@ class Order:
     def take_order():
         while True:
             Order.display_menu()
-            choice = int(input('Choice: '))
+            choice = Console.read_number('Choice', 1, 5)
 
             if choice == 5:
                 print('Thank you :)')
+                if Cart.is_empty():
+                    raise EmptyCartException()
                 Cart.print_invoice()
                 break
 
             match choice:
                 case 1:
                     name = input('Name: ')
-                    weight = int(input('Weight (grams): '))
-                    price_kg = int(input('Price (kg): '))
+                    weight = int(Console.read_number('Weight (grams)', 1, 1000))
+                    price_kg = int(Console.read_number('Price (kg)', 1, 1000))
                     Cart.add_to_cart(Candy(name, weight, price_kg))
 
                 case 2:
                     name = input('Name: ')
-                    units = int(input('Units: '))
-                    price_dozen = int(input('Price (Dozen): '))
+                    units = int(Console.read_number('Units', 1, 1000))
+                    price_dozen = int(Console.read_number('Price (Dozen)', 1, 1000))
                     Cart.add_to_cart(Cookie(name, units, price_dozen))
 
                 case 3:
                     name = input('Name: ')
-                    units = int(input('Units: '))
-                    price_unit = int(input('Price: '))
+                    units = int(Console.read_number('Units', 1, 1000))
+                    price_unit = int(Console.read_number('Price (Unit)', 1, 1000))
                     Cart.add_to_cart(IceCream(name, units, price_unit))
 
                 case 4:
                     name = input('Name: ')
-                    units = int(input('Units: '))
-                    price_unit = int(input('Price: '))
+                    units = int(Console.read_number('Units', 1, 1000))
+                    price_unit = int(Console.read_number('Price (Unit)', 1, 1000))
+
                     toppings = []
                     while True:
                         add_topping = input('Add topping? (yes / no): ').lower()
                         if add_topping == 'no':
                             break
-                        topping_name = input('Topping Name: ')
-                        topping_units = int(input('Topping Units: '))
-                        topping_price_unit = int(input('Topping Price: '))
+
+                        topping_name = input('Name: ')
+                        topping_units = int(Console.read_number('Units', 1, 1000))
+                        topping_price_unit = int(Console.read_number('Price (Unit)', 1, 1000))
+
                         toppings.append(Topping(topping_name, topping_units, topping_price_unit))
                     Cart.add_to_cart(Sundae(name, units, price_unit, toppings))
-
-
 
     @staticmethod
     def display_menu():
@@ -63,4 +69,13 @@ class Order:
 
 
 order = Order()
-order.take_order()
+try:
+    order.take_order()
+except EmptyCartException as e:
+    print(e)
+except InvalidValueException as e:
+    print(e)
+except ValueError as e:
+    print('Please enter a valid value.')
+except Exception as e:
+    print(e)
